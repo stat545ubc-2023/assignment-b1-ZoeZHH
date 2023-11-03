@@ -10,9 +10,10 @@ library(dplyr)
 library(datateachr)
 library(tidyverse)
 library(testthat)
+library(ggplot2)
 ```
 
-My function idea: When I did the mini data analysis 2 on examining the relationships between 2 variables, I keep producing the figure between two numeric columns' variables and checking if there's a linear relationship between them, thus I would like make a plot function on examining 2 variables' linear relationship.
+My function idea: When I did the mini data analysis 2 on examining the relationships between 2 variables by using apt_buildings dataset, I keep producing the figure between two numeric variables and checking if there's a linear relationship between them, thus I would like make a plot function on examining 2 variables' linear relationship.
 
 ```{r}
 # Exercise 1 & Exercise 2
@@ -43,7 +44,7 @@ lm_check <- function (df, x_var, y_var, na.rm = FALSE, ...) {
     data_to_plot <- na.omit(data_to_plot[, c(x_var, y_var)])
   }
   # Create the plot
-  plot <- ggplot(data_to_plot, aes_string(x = x_var, y = y_var)) +
+  plot <- ggplot(data_to_plot, aes_string (x = x_var, y = y_var)) +
     geom_point() +
     geom_smooth(method = "lm", color = "blue", se = FALSE, ...) +
     theme_minimal() 
@@ -52,8 +53,7 @@ lm_check <- function (df, x_var, y_var, na.rm = FALSE, ...) {
 ```
 
 ```{r}
-# Check for the dataset apt_buildings
-head (apt_buildings)
+# Tidy the apt_buildings dats a little bit for a more constrained plot
 apt_buildings <- apt_buildings %>% 
   filter(no_of_units <= 1000)
 ```
